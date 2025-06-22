@@ -1,12 +1,11 @@
 from flask import Flask
-from doclayout_yolo import YOLOv10
-model = YOLOv10("doclayout_yolo_docstructbench_imgsz1024.pt")
-
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
+    from doclayout_yolo import YOLOv10
+    model = YOLOv10("doclayout_yolo_docstructbench_imgsz1024.pt")
     filename = "dvurog_p73.png"
     det_res = model.predict(
         filename,   # Image to predict
