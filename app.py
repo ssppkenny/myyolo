@@ -10,7 +10,10 @@ from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
+def get_file():
+    return hf_hub_download(repo_id="juliozhao/DocLayout-YOLO-DocStructBench", filename="doclayout_yolo_docstructbench_imgsz1024.pt")
 
+model = YOLOv10(get_file())
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,8 +26,6 @@ def allowed_file(filename):
 @app.route("/", methods=['GET', 'POST'])
 def doc_layout():
     if request.method == 'POST':
-        filepath = hf_hub_download(repo_id="juliozhao/DocLayout-YOLO-DocStructBench", filename="doclayout_yolo_docstructbench_imgsz1024.pt")
-        model = YOLOv10(filepath)
         if 'file' not in request.files:
             flash('no file part')
             return redirect(request.url)
