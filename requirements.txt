@@ -1,2 +1,4 @@
 doclayout-yolo == 0.0.4
+gunicorn == 23.0.0
+flask == 3.1.1
 
