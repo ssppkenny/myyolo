@@ -1,5 +1,6 @@
 from flask import Flask
 from doclayout_yolo import YOLOv10
+from huggingface_hub import hf_hub_download
 
 import os
 import json
@@ -10,7 +11,6 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
-model = YOLOv10("doclayout_yolo_docstructbench_imgsz1024.pt")
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,6 +23,8 @@ def allowed_file(filename):
 @app.route("/", methods=['GET', 'POST'])
 def doc_layout():
     if request.method == 'POST':
+        filepath = hf_hub_download(repo_id="juliozhao/DocLayout-YOLO-DocStructBench", filename="doclayout_yolo_docstructbench_imgsz1024.pt")
+        model = YOLOv10(filepath)
         if 'file' not in request.files:
             flash('no file part')
             return redirect(request.url)
