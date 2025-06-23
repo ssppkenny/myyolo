@@ -43,9 +43,8 @@ def doc_layout():
             )
             names = det_res[0].names
             blocknames = [names[int(n)] for n in det_res[0].boxes.cls]
-            xyxy = [str(tuple(a.tolist())) for a in det_res[0].boxes.xyxy]
-            res = {key: value for key, value in zip(xyxy, blocknames)}
-
+            xyxy = [a.tolist() for a in det_res[0].boxes.xyxy]
+            res = [{"coords": y, "type": x} for x, y in zip(blocknames, xyxy)]
             return json.dumps(res)
     return '''
     <!doctype html>
