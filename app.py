@@ -2,6 +2,7 @@ from flask import Flask
 from doclayout_yolo import YOLOv10
 from huggingface_hub import hf_hub_download
 
+
 import os
 import json
 from flask import Flask, flash, request, redirect, url_for
