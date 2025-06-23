@@ -1,7 +1,7 @@
 # nixpacks.toml
 [phases.setup]
 nixPkgs = ['...', 'python3', 'opencv']
-aptPkgs = ['...', 'libgl1', 'libgl1-mesa-glx']
+aptPkgs = ['...', 'libgl1', 'libgl1-mesa-dev', 'libgl1-mesa-dri']
 
 [start]
 cmd = "gunicorn app:app"
