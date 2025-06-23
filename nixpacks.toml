@@ -1,6 +1,6 @@
 # nixpacks.toml
 [phases.setup]
-nixPkgs = ['python3', 'opencv']
+nixPkgs = ['python3', 'opencv', 'libGL']
 
 [start]
 cmd = "gunicorn app:app"
